@@ -7,6 +7,8 @@ namespace lw20_sensor {
 static const char *TAG = "lw20_sensor.sensor";
 
 void LW20Sensor::setup() {
+    Serial1.begin(115200);
+
     ESP_LOGCONFIG(TAG, "Setting up LW20...");
 
     if (!this->lw20.init()) {
