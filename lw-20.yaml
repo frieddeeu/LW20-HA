@@ -24,7 +24,12 @@ logger:
 
 # Enable Home Assistant API
 api:
+  encryption:
+    key: "gzCMmSo2nG2xaOvF29lgYVSNBvC5zd1TOb5hRNs0RB0="
 
+ota:
+  - platform: esphome
+    password: "2272b08437e0ff5ecdf27d73e4eb5c63"
 
 wifi:
   ssid: !secret wifi_ssid
@@ -46,14 +51,10 @@ i2c:
   scl: 05
 
 uart:
-  - rx_pin: 14
-    tx_pin: 12
-    baud_rate: 9600
+  - rx_pin: 16
+    tx_pin: 17
+    baud_rate: 115200
     id: uart_1
-  - rx_pin: 02
-    tx_pin: 00
-    baud_rate: 9600
-    id: uart_2
 
 binary_sensor:
   - platform: status
