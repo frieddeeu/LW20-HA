@@ -5,18 +5,14 @@ from esphome.const import CONF_ID, ICON_EMPTY, UNIT_EMPTY,UNIT_HECTOPASCAL, UNIT
 
 DEPENDENCIES = ['i2c']
 
-CONF_I2C_ADDR = 0x5d
+CONF_I2C_ADDR = 0x66
 
-lps22_sensor = cg.esphome_ns.namespace('lps22_sensor')
-LPS22Sensor = lps22_sensor.class_('LPS22Sensor', cg.PollingComponent, i2c.I2CDevice)
-
-#CONFIG_SCHEMA = sensor.sensor_schema(UNIT_EMPTY, ICON_EMPTY, 1).extend({
-#    cv.GenerateID(): cv.declare_id(LPS22Sensor),
-#}).extend(cv.polling_component_schema('60s')).extend(i2c.i2c_device_schema(CONF_I2C_ADDR))
+lw20_sensor = cg.esphome_ns.namespace('lw20_sensor')
+LW20Sensor = lw20_sensor.class_('LW20Sensor', cg.PollingComponent, i2c.I2CDevice)
 CONFIG_SCHEMA = (
     cv.Schema(
         {
-            cv.GenerateID(): cv.declare_id(LPS22Sensor),
+            cv.GenerateID(): cv.declare_id(LW20Sensor),
             cv.Required(CONF_TEMPERATURE): sensor.sensor_schema(
                 unit_of_measurement=UNIT_CELSIUS,
                 accuracy_decimals=1,

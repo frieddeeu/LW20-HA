@@ -1,0 +1,75 @@
+esphome:
+  name: "lw-20-01"
+  libraries:
+    - SPI
+    - Wire
+    - LW20=https://github.com/frieddeeu/LW20.git
+  project:
+    name: "LW20.Extended"
+    version: "1.0.0"
+    
+external_components:
+  # Use the LPS22 Sensor External Component from our GitHub
+  - source: github://frieddeeu/LW20-HA
+    components: [ lw20_sensor ]
+    refresh: 0s
+    
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+
+ota:
+  platform: esphome
+
+dashboard_import:
+  package_import_url: github://frieddeeu/LW20-HA/blob/main/air-gradient.yaml
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  power_save_mode: none
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Esphome-Web-ABCDEFG"
+    password: "password_here"
+
+captive_portal:
+    
+i2c:
+  sda: 04
+  scl: 05
+
+uart:
+  - rx_pin: 14
+    tx_pin: 12
+    baud_rate: 9600
+    id: uart_1
+  - rx_pin: 02
+    tx_pin: 00
+    baud_rate: 9600
+    id: uart_2
+
+binary_sensor:
+  - platform: status
+    name: "Air Gradient Status"
+
+sensor:
+  - platform: lw20_sensor
+    temperature:
+      name: "LW20 Laser Temperature"
+      unit_of_measurement: °C
+      accuracy_decimals: 1
+    distance:
+      name: "Distance"
+      unit_of_measurement: m
+      accuracy_decimals: 2
+      id: dist
+  
