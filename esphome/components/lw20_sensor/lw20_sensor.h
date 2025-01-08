@@ -7,6 +7,7 @@
 // ...
 // Basic demo for pressure readings from Adafruit LPS2X
 #include <Wire.h>
+#include <LW20.h>
 
 namespace esphome {
 namespace lw20_sensor {
