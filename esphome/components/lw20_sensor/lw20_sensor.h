@@ -2,7 +2,7 @@
 
 #include "esphome/core/component.h"
 #include "esphome/components/sensor/sensor.h"
-#include "esphome/components/i2c/i2c.h"
+#include "esphome/components/uart/uart.h"
 #include <Wire.h>
 #include <LW20.h>
 

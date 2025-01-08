@@ -45,10 +45,6 @@ dashboard_import:
 
 
 captive_portal:
-    
-i2c:
-  sda: 04
-  scl: 05
 
 uart:
   - rx_pin: 16
