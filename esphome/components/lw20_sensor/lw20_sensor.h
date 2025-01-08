@@ -9,7 +9,7 @@
 namespace esphome {
 namespace lw20_sensor {
 
-class LW20Sensor : public sensor::Sensor, public PollingComponent, public i2c::I2CDevice {
+class LW20Sensor : public sensor::Sensor, public PollingComponent, public uart::UARTDevice {
  public:
   LW20Sensor() : PollingComponent(15000), lw20(Serial1, 115200) {}
 
