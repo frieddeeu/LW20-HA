@@ -1,7 +1,7 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import i2c, sensor
-from esphome.const import CONF_ID, ICON_EMPTY, UNIT_EMPTY,UNIT_HECTOPASCAL, UNIT_CELSIUS,  CONF_TEMPERATURE, CONF_PRESSURE, DEVICE_CLASS_PRESSURE, DEVICE_CLASS_TEMPERATURE, STATE_CLASS_MEASUREMENT
+from esphome.const import CONF_ID, ICON_EMPTY, UNIT_EMPTY, UNIT_HECTOPASCAL, UNIT_CELSIUS,  CONF_TEMPERATURE, CONF_DISTANCE, DEVICE_CLASS_DISTANCE, DEVICE_CLASS_TEMPERATURE, STATE_CLASS_MEASUREMENT
 
 DEPENDENCIES = ['i2c']
 
@@ -19,10 +19,10 @@ CONFIG_SCHEMA = (
                 device_class=DEVICE_CLASS_TEMPERATURE,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
-            cv.Required(CONF_PRESSURE): sensor.sensor_schema(
+            cv.Required(CONF_DISTANCE): sensor.sensor_schema(
                 unit_of_measurement=UNIT_HECTOPASCAL,
                 accuracy_decimals=1,
-                device_class=DEVICE_CLASS_PRESSURE,
+                device_class=DEVICE_CLASS_DISTANCE,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
 #            cv.Optional(CONF_HEATER_ENABLED, default=False): cv.boolean,
@@ -41,6 +41,6 @@ async def to_code(config):
         sens = await sensor.new_sensor(config[CONF_TEMPERATURE])
         cg.add(var.set_temperature_sensor(sens))
 
-    if CONF_PRESSURE in config:
-        sens = await sensor.new_sensor(config[CONF_PRESSURE])
-        cg.add(var.set_pressure_sensor(sens))
+    if CONF_DISTANCE in config:
+        sens = await sensor.new_sensor(config[CONF_DISTANCE])
+        cg.add(var.set_distance_sensor(sens))
