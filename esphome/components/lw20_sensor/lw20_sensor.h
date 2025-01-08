@@ -11,7 +11,7 @@ namespace lw20_sensor {
 
 class LW20Sensor : public sensor::Sensor, public PollingComponent, public i2c::I2CDevice {
  public:
-  LW20Sensor() : PollingComponent(15000), lw20(&Serial1) {}
+  LW20Sensor() : PollingComponent(15000), lw20(Serial1, 115200) {}
 
   void set_temperature_sensor(sensor::Sensor *temperature_sensor_) { temperature_sensor = temperature_sensor_; }
   void set_distance_sensor(sensor::Sensor *distance_sensor_) { distance_sensor = distance_sensor_; }
