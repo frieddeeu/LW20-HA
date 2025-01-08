@@ -7,10 +7,14 @@ namespace lw20_sensor {
 static const char *TAG = "lw20_sensor.sensor";
 
 void LW20Sensor::setup() {
-    Serial.begin(115200);
+    Serial1.begin(115200);
     ESP_LOGCONFIG(TAG, "Setting up LW20...");
 
-    this->lw20.init();
+    if (!this->lw20.init()) {
+        ESP_LOGE(TAG, "Failed to initialize LW20 sensor!");
+        return;
+    }
+
     ESP_LOGCONFIG(TAG, "Model: %s, Firmware: %s", this->lw20.getProductName(), this->lw20.getFirmwareVersion());
     this->lw20.setLaserParams(LWMS_48);
 }
@@ -19,8 +23,12 @@ void LW20Sensor::update() {
     float distance = this->lw20.getLaserDistance(LWPT_FIRST, LWRF_RAW);
     float temperature = this->lw20.getLaserTemperature();
 
-    this->distance_sensor->publish_state(distance);
-    this->temperature_sensor->publish_state(temperature);
+    if (this->distance_sensor) {
+        this->distance_sensor->publish_state(distance);
+    }
+    if (this->temperature_sensor) {
+        this->temperature_sensor->publish_state(temperature);
+    }
 
     ESP_LOGD(TAG, "Distance: %.2f m, Temperature: %.2f °C", distance, temperature);
 }
